@@ -1,0 +1,18 @@
+.back {
+  @include flex-items-center;
+
+  column-gap: 4px;
+  width: 66px;
+  height: var(--size-16);
+  margin-block: 40px var(--size-16);
+  font-weight: var(--fw-700);
+  color: var(--secondary);
+
+  @include hover {
+    color: var(--primary);
+  }
+
+  @include mobile {
+    margin-top: var(--size-24);
+  }
+}

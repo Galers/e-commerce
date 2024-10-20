@@ -1,0 +1,35 @@
+.details {
+  @include flex-column;
+
+  flex: 1 1 50%;
+  align-items: center;
+  justify-content: space-between;
+  row-gap: var(--size-24);
+  background-color: var(--elements);
+  border-radius: var(--size-8);
+  padding: var(--size-24);
+
+  h2 {
+    text-align: center;
+  }
+
+  .contacts {
+    @include flex-column;
+
+    row-gap: var(--size-16);
+  }
+
+  .follow {
+    @include flex-column;
+
+    align-items: center;
+    row-gap: var(--size-8);
+
+    .socials {
+      @include flex-center;
+
+      flex-wrap: wrap;
+      column-gap: var(--size-8);
+    }
+  }
+}

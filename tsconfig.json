@@ -1,0 +1,22 @@
+{
+  "extends": "@mate-academy/students-ts-config",
+  "include": ["src"],
+  "compilerOptions": {
+    "sourceMap": false,
+    "types": ["node", "cypress"],
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "baseUrl": "./src",
+    "paths": {
+      "@components/*": ["components/*"],
+      "@hooks/*": ["hooks/*"],
+      "@images/*": ["images/*"],
+      "@pages/*": ["pages/*"],
+      "@routes/*": ["routes/*"],
+      "@store/*": ["store/*"],
+      "@ui/*": ["ui/*"],
+      "@utils/*": ["utils/*"]
+    }
+  }
+}

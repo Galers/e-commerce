@@ -1,0 +1,22 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--size-8);
+
+  button {
+    @include size(var(--size-32), var(--size-32));
+
+    border: var(--border-element);
+    font-weight: var(--fw-600);
+
+    @include hover {
+      border-color: var(--primary);
+    }
+
+    &.active {
+      color: var(--white);
+      background-color: var(--primary);
+    }
+  }
+}

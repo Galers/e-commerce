@@ -1,0 +1,15 @@
+export const ROUTES = {
+  HOME: '/',
+  FAVOURITES: '/favourites',
+  CART: '/cart',
+  CATEGORIES: 'categories',
+  CATEGORY: ':category',
+  PRODUCT_DETAIL: ':id?',
+  PHONES: 'phones',
+  TABLETS: 'tablets',
+  ACCESSORIES: 'accessories',
+  CONTACT: '/contact',
+  RIGHTS: '/rights',
+  NOTFOUND: '/not-found',
+  ERROR: '*',
+};

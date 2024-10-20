@@ -1,0 +1,43 @@
+.link {
+  @include flex-center;
+
+  position: relative;
+  text-decoration: none;
+  height: var(--size-64);
+
+  &::after {
+    @include pseudo(0, 3px, var(--primary));
+  }
+
+  &:hover::after {
+    width: 100%;
+  }
+
+  &.active {
+    color: var(--primary);
+
+    &::after {
+      width: 100%;
+    }
+  }
+
+  &:hover {
+    color: var(--primary);
+  }
+
+  @include mobile {
+    height: var(--size-32);
+
+    &::after {
+      bottom: 3px;
+    }
+
+    &.active {
+      color: var(--primary);
+
+      &::after {
+        width: 100%;
+      }
+    }
+  }
+}

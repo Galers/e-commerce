@@ -1,0 +1,32 @@
+.links {
+  display: flex;
+  align-items: center;
+  column-gap: var(--size-8);
+  color: var(--secondary);
+  font-size: var(--size-12);
+  line-height: 1.25;
+
+  a {
+    display: flex;
+    column-gap: var(--size-8);
+    color: var(--primary);
+
+    &::first-letter {
+      text-transform: uppercase;
+    }
+  }
+
+  p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  svg {
+    color: var(--icon);
+  }
+
+  .active {
+    color: var(--primary);
+  }
+}
