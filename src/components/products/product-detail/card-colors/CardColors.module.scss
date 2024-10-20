@@ -22,6 +22,7 @@
   .rectangle {
     @include size(30px, 30px);
 
+    display: inline-block;
     border: 2px solid var(--white);
     border-radius: 36px;
   }

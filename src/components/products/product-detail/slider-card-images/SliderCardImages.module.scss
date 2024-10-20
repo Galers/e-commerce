@@ -26,8 +26,6 @@
     @include size(var(--size-80), var(--size-80));
 
     border: var(--border-element);
-    transition-duration: var(--transition-duration);
-    cursor: pointer;
 
     img {
       @include size(100%, 100%);

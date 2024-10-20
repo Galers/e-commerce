@@ -20,11 +20,14 @@ export const CardCapacity: FC<TProps> = ({
       {capacities.map(capacity => (
         <button
           key={capacity}
+          type="button"
           onClick={() => onCapacityChange(capacity)}
           className={cn(
             styles.rectangle,
             capacity === currentCapacity && styles.active,
           )}
+          aria-label={`Select capacity ${capacity}`}
+          title={capacity}
         >
           {capacity}
         </button>

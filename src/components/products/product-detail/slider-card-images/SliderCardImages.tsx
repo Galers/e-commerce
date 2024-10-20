@@ -22,13 +22,15 @@ export const SliderCardImages: FC<TProps> = ({ images = [] }) => {
         <img src={currentImage} alt="Selected image" />
       </div>
       {images.map((image, index) => (
-        <div
+        <button
+          key={`${image}-${index}`}
+          type="button"
           className={cn(
             styles.imagesList,
             currentImage === image && styles.active,
           )}
-          key={image}
           onClick={() => setCurrentImage(image)}
+          aria-label={`Select image ${index + 1}`}
         >
           <img
             src={image}
@@ -37,7 +39,7 @@ export const SliderCardImages: FC<TProps> = ({ images = [] }) => {
             height={80}
             loading="lazy"
           />
-        </div>
+        </button>
       ))}
     </div>
   );

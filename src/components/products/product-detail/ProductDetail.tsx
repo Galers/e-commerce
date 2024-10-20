@@ -1,4 +1,4 @@
-import { FC, useCallback, useEffect, useMemo, useState } from 'react';
+import { FC, useCallback, useMemo } from 'react';
 import { Navigate, useNavigate, useParams } from 'react-router-dom';
 
 import { ProductsSlider } from '../products-slider/ProductsSlider';
@@ -16,9 +16,9 @@ import { Loader } from '@ui/loader/Loader';
 import { useProducts } from '@hooks/useProducts';
 import { ROUTES } from '@utils/constants/routes';
 import { getProductUrl } from '@utils/helpers/getProductUrl';
-import { generateRandomID } from '@utils/helpers/generateRandomID';
 
 import styles from './ProductDetail.module.scss';
+import { useRandomID } from '@hooks/useRandomID';
 
 export const ProductDetail: FC = () => {
   const navigate = useNavigate();
@@ -36,33 +36,30 @@ export const ProductDetail: FC = () => {
 
   const product = products.find(product => product.itemId === itemId);
 
-  const [randomID, setRandomID] = useState<number | null>(null);
+  const randomID = useRandomID(itemId);
 
-  useEffect(() => {
-    const newRandomID = generateRandomID();
+  const getNewItemId = useCallback(
+    (
+      category: string,
+      capacity: string,
+      color: string,
+      nameSpaceId: string,
+    ) => {
+      const groupByNameSpaceId = productsWithDetails.filter(
+        product => product.namespaceId === nameSpaceId,
+      );
 
-    setRandomID(newRandomID);
-  }, [itemId]);
+      const foundProduct = groupByNameSpaceId.find(
+        product =>
+          product.category === category &&
+          product.capacity === capacity &&
+          product.color === color,
+      );
 
-  const getNewItemId = (
-    category: string,
-    capacity: string,
-    color: string,
-    nameSpaceId: string,
-  ) => {
-    const groupByNameSpaceId = productsWithDetails.filter(
-      product => product.namespaceId === nameSpaceId,
-    );
-
-    const foundProduct = groupByNameSpaceId.find(
-      product =>
-        product.category === category &&
-        product.capacity === capacity &&
-        product.color === color,
-    );
-
-    return foundProduct?.id;
-  };
+      return foundProduct?.id;
+    },
+    [productsWithDetails],
+  );
 
   const handleChange = useCallback(
     (newCapacity?: string, newColor?: string) => {
@@ -105,50 +102,50 @@ export const ProductDetail: FC = () => {
           <Loader />
         </section>
       )}
-      {!loading && (
+      {!loading && selectedProduct && (
         <section className={styles.productCard}>
           <Breadcrumbs
-            text={selectedProduct?.category}
-            id={selectedProduct?.name}
-            category={selectedProduct?.category}
+            text={selectedProduct.category}
+            id={selectedProduct.name}
+            category={selectedProduct.category}
           />
           <BackArrow />
           <div className={styles.card}>
-            <h2>{selectedProduct?.name}</h2>
+            <h2>{selectedProduct.name}</h2>
 
             <div className={styles.features}>
-              <SliderCardImages images={selectedProduct?.images} />
+              <SliderCardImages images={selectedProduct.images} />
 
               <div className={styles.wrapper}>
                 <div className={styles.ids}>ID: {randomID}</div>
                 <CardColors
-                  colors={selectedProduct?.colorsAvailable}
-                  currentColor={selectedProduct?.color}
+                  colors={selectedProduct.colorsAvailable}
+                  currentColor={selectedProduct.color}
                   onColorChange={onColorChange}
                 />
 
                 <hr />
                 <CardCapacity
-                  capacities={selectedProduct?.capacityAvailable}
-                  currentCapacity={selectedProduct?.capacity}
+                  capacities={selectedProduct.capacityAvailable}
+                  currentCapacity={selectedProduct.capacity}
                   onCapacityChange={onCapacityChange}
                 />
                 <hr />
 
                 <div className={styles.price}>
                   <ProductPrice
-                    price={selectedProduct?.priceDiscount}
-                    fullPrice={selectedProduct?.priceRegular}
+                    price={selectedProduct.priceDiscount}
+                    fullPrice={selectedProduct.priceRegular}
                     discount
                   />
                   <ActionButtons product={product} />
                 </div>
 
                 <ProductSpec
-                  screen={selectedProduct?.screen}
-                  resolution={selectedProduct?.resolution}
-                  processor={selectedProduct?.processor}
-                  ram={selectedProduct?.ram}
+                  screen={selectedProduct.screen}
+                  resolution={selectedProduct.resolution}
+                  processor={selectedProduct.processor}
+                  ram={selectedProduct.ram}
                 />
               </div>
             </div>
@@ -164,15 +161,15 @@ export const ProductDetail: FC = () => {
                 <h3>Tech specs</h3>
                 <hr />
                 <ProductSpec
-                  screen={selectedProduct?.screen}
-                  resolution={selectedProduct?.resolution}
-                  capacity={selectedProduct?.capacity}
-                  processor={selectedProduct?.processor}
-                  ram={selectedProduct?.ram}
-                  camera={selectedProduct?.camera}
-                  zoom={selectedProduct?.zoom}
-                  memory={selectedProduct?.capacity}
-                  cell={selectedProduct?.cell}
+                  screen={selectedProduct.screen}
+                  resolution={selectedProduct.resolution}
+                  capacity={selectedProduct.capacity}
+                  processor={selectedProduct.processor}
+                  ram={selectedProduct.ram}
+                  camera={selectedProduct.camera}
+                  zoom={selectedProduct.zoom}
+                  memory={selectedProduct.capacity}
+                  cell={selectedProduct.cell}
                 />
               </div>
             </div>

@@ -21,17 +21,19 @@ export const CardColors: FC<TProps> = ({
     <div className={styles.colors}>
       <span>Available colors</span>
       {colors.map(color => (
-        <div
+        <button
           key={color}
+          type="button"
           className={cn(styles.circle, color === currentColor && styles.active)}
           onClick={() => onColorChange(color)}
+          aria-label={`Select color ${color}`}
         >
-          <button
+          <span
             className={styles.rectangle}
             title={color}
             style={{ backgroundColor: `${getColorHex(color as ColorNames)}` }}
-          ></button>
-        </div>
+          ></span>
+        </button>
       ))}
     </div>
   );

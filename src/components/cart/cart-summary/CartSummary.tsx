@@ -27,7 +27,12 @@ export const CartSummary: FC<TProps> = ({ toggleModal }) => {
         Total for {totalQuantity} {plural}
       </p>
       <div className={styles.separator}></div>
-      <button type="button" onClick={toggleModal}>
+      <button
+        type="button"
+        onClick={toggleModal}
+        aria-haspopup="dialog"
+        aria-label="Open checkout confirmation modal"
+      >
         Checkout
       </button>
     </div>

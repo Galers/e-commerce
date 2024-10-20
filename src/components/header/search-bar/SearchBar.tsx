@@ -51,14 +51,24 @@ export const SearchBar: FC<TProps> = ({
 
       <div className={styles.icons}>
         {query && (
-          <div className={styles.icon} onClick={clearQuery}>
+          <button
+            className={styles.icon}
+            onClick={clearQuery}
+            type="button"
+            aria-label="Clear search query"
+          >
             <CloseIcon />
-          </div>
+          </button>
         )}
 
-        <div onClick={() => inputRef.current?.focus()} className={styles.icon}>
+        <button
+          onClick={() => inputRef.current?.focus()}
+          className={styles.icon}
+          type="button"
+          aria-label="Focus on search input"
+        >
           <SearchIcon />
-        </div>
+        </button>
       </div>
     </>
   );

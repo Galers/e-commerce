@@ -56,13 +56,13 @@
         flex-direction: column;
         row-gap: 5px;
 
-        li {
+        .item {
           color: var(--secondary);
           align-content: center;
           padding-inline: var(--size-12);
           height: var(--size-32);
 
-          .active {
+          &.active {
             color: var(--primary);
           }
 

@@ -28,11 +28,8 @@
   right: 20px;
 
   .icon {
-    @include flex-center;
-
-    height: 100%;
-    cursor: pointer;
-    transition-duration: var(--transition-duration);
+    display: flex;
+    background: none;
 
     @include hover {
       scale: 1.1;

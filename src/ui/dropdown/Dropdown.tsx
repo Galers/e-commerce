@@ -42,6 +42,15 @@ export const Dropdown: FC<TDropdownProps> = ({
     [setItemPerPage],
   );
 
+  const keyboardSelection = (
+    e: React.KeyboardEvent<HTMLLIElement>,
+    value: string | number,
+  ) => {
+    if (e.key === 'Enter') {
+      handleOptionSelect(value);
+    }
+  };
+
   const currentOption =
     options.find(option => option.value === selectedValue)?.label ||
     options[0]?.label;
@@ -65,20 +74,20 @@ export const Dropdown: FC<TDropdownProps> = ({
 
         {isDropdownOpen && (
           <div className={styles.optionsList}>
-            <ul className={styles.option}>
+            <ul role="menu" className={styles.option}>
               {options.map(option => (
                 <li
                   key={option.value}
-                  onClick={() => handleOptionSelect(option.value)}
                   role="menuitem"
+                  tabIndex={0}
+                  onClick={() => handleOptionSelect(option.value)}
+                  onKeyDown={e => keyboardSelection(e, option.value)}
+                  className={cn(
+                    styles.item,
+                    selectedValue === option.value && styles.active,
+                  )}
                 >
-                  <span
-                    className={cn(
-                      selectedValue === option.value && styles.active,
-                    )}
-                  >
-                    {option.label}
-                  </span>
+                  {option.label}
                 </li>
               ))}
             </ul>
